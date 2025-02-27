@@ -50,6 +50,7 @@ public:
 
     rhi::IShaderObject* rhi_shader_object() const { return m_shader_object; }
 
+    slang::ISession* get_slang_session() const;
 protected:
     ref<Device> m_device;
     rhi::IShaderObject* m_shader_object;
