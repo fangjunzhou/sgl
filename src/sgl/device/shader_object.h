@@ -9,6 +9,8 @@
 #include "sgl/device/fwd.h"
 #include "sgl/device/shader_offset.h"
 #include "sgl/device/resource.h"
+#include "sgl/device/types.h"
+#include "sgl/device/device.h"
 
 #include <slang-rhi.h>
 
@@ -51,6 +53,7 @@ public:
     rhi::IShaderObject* rhi_shader_object() const { return m_shader_object; }
 
     slang::ISession* get_slang_session() const;
+    sgl::DeviceType get_device_type() const;
 protected:
     ref<Device> m_device;
     rhi::IShaderObject* m_shader_object;
