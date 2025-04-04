@@ -52,9 +52,7 @@ public:
 
     rhi::IShaderObject* rhi_shader_object() const { return m_shader_object; }
 
-    slang::ISession* get_slang_session() const;
-    sgl::DeviceType get_device_type() const;
-
+    ref<Device> get_device() const { return m_device; }
 protected:
     ref<Device> m_device;
     rhi::IShaderObject* m_shader_object;
