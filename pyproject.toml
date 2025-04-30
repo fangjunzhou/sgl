@@ -1,3 +1,11 @@
+[project]
+name = "nv-sgl"
+version = "0.15.0"
+description = "Slang Graphics Library"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+
 [build-system]
 requires = ["setuptools", "wheel", "typing-extensions", "libcst"]
 build-backend = "setuptools.build_meta"
@@ -14,3 +22,14 @@ reportInvalidStringEscapeSequence = "error"
 reportMissingParameterType = "error"
 reportMissingTypeArgument = "warning"
 reportInvalidTypeForm = "warning"
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "pytest>=8.3.5",
+    "typing-extensions>=4.13.2",
+    "deepdiff>=8.4.2",
+    "libcst>=1.7.0",
+    "numpy>=2.0.2",
+    "pyright>=1.1.400",
+]

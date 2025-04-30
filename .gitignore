@@ -8,3 +8,4 @@ tools/host
 *.pyc
 
 .vs/
+src/nv_sgl.egg-info
