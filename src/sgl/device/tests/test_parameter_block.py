@@ -36,21 +36,19 @@ def test_parameter_block(device_type: sgl.DeviceType):
     output_buffer = device.create_buffer(
         element_count=1,  # Only need one element as we're only launching one thread
         struct_size=4,  # float is 4 bytes
-        usage=sgl.ResourceUsage.unordered_access | sgl.ResourceUsage.shader_resource,
+        usage=sgl.BufferUsage.unordered_access | sgl.BufferUsage.shader_resource,
     )
 
     input_buffer = device.create_buffer(
         element_count=1,  # Only need one element as we're only launching one thread
         struct_size=4,  # float is 4 bytes
-        usage=sgl.ResourceUsage.unordered_access | sgl.ResourceUsage.shader_resource,
+        usage=sgl.BufferUsage.unordered_access | sgl.BufferUsage.shader_resource,
         data=np.array([6.0], dtype=np.float32),
     )
 
-    # Create a command buffer
-    command_buffer = device.create_command_buffer()
-
     # Encode compute commands
-    with command_buffer.encode_compute_commands() as encoder:
+    command_encoder = device.create_command_encoder()
+    with command_encoder.begin_compute_pass() as encoder:
         # Bind the pipeline
         shader_object = encoder.bind_pipeline(kernel.pipeline)
 
@@ -71,7 +69,7 @@ def test_parameter_block(device_type: sgl.DeviceType):
         encoder.dispatch(thread_count=[1, 1, 1])
 
     # Submit the command buffer
-    command_buffer.submit()
+    device.submit_command_buffer(command_encoder.finish())
 
     # Read back the result
     result = output_buffer.to_numpy().view(np.float32)[0]
